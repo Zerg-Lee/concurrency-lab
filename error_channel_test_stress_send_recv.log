@@ -1,0 +1,1 @@
+channel: stress_send_recv.c:126: run_stress_send_recv: Assertion `status == SUCCESS' failed.

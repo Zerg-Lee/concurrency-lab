@@ -1,0 +1,51 @@
+==================
+WARNING: ThreadSanitizer: data race (pid=311447)
+  Read of size 8 at 0x7b0800000020 by thread T5:
+    #0 channel_non_blocking_receive /vagrant/channel.c:116 (channel_sanitize+0xbccc3)
+    #1 helper_non_blocking_receive /vagrant/test.c:119 (channel_sanitize+0xbf77a)
+
+  Previous write of size 8 at 0x7b0800000020 by thread T1 (mutexes: write M0, write M1):
+    #0 buffer_add /vagrant/buffer.c:28 (channel_sanitize+0xbd01a)
+    #1 channel_send /vagrant/channel.c:33 (channel_sanitize+0xbcaa6)
+    #2 helper_send /vagrant/test.c:87 (channel_sanitize+0xbf5d6)
+
+  Location is heap block of size 32 at 0x7b0800000020 allocated by main thread:
+    #0 malloc <null> (channel_sanitize+0x13947)
+    #1 buffer_create /vagrant/buffer.c:6 (channel_sanitize+0xbcf2e)
+    #2 channel_create /vagrant/channel.c:8 (channel_sanitize+0xbc979)
+    #3 test_non_blocking_receive /vagrant/test.c:446 (channel_sanitize+0xc088c)
+    #4 single_test /vagrant/test.c:1670 (channel_sanitize+0xc4965)
+    #5 main /vagrant/test.c:1709 (channel_sanitize+0x955e)
+
+  Mutex M0 (0x7b3000000010) created at:
+    #0 pthread_mutex_init <null> (channel_sanitize+0x2dbd1)
+    #1 channel_create /vagrant/channel.c:10 (channel_sanitize+0xbc9a7)
+    #2 test_non_blocking_receive /vagrant/test.c:446 (channel_sanitize+0xc088c)
+    #3 single_test /vagrant/test.c:1670 (channel_sanitize+0xc4965)
+    #4 main /vagrant/test.c:1709 (channel_sanitize+0x955e)
+
+  Mutex M1 (0x7b3000000038) created at:
+    #0 pthread_mutex_init <null> (channel_sanitize+0x2dbd1)
+    #1 channel_create /vagrant/channel.c:11 (channel_sanitize+0xbc9b3)
+    #2 test_non_blocking_receive /vagrant/test.c:446 (channel_sanitize+0xc088c)
+    #3 single_test /vagrant/test.c:1670 (channel_sanitize+0xc4965)
+    #4 main /vagrant/test.c:1709 (channel_sanitize+0x955e)
+
+  Thread T5 (tid=311453, running) created by main thread at:
+    #0 pthread_create <null> (channel_sanitize+0x422a8)
+    #1 test_non_blocking_receive /vagrant/test.c:471 (channel_sanitize+0xc09b8)
+    #2 single_test /vagrant/test.c:1670 (channel_sanitize+0xc4965)
+    #3 main /vagrant/test.c:1709 (channel_sanitize+0x955e)
+
+  Thread T1 (tid=311449, finished) created by main thread at:
+    #0 pthread_create <null> (channel_sanitize+0x422a8)
+    #1 test_non_blocking_receive /vagrant/test.c:461 (channel_sanitize+0xc092c)
+    #2 single_test /vagrant/test.c:1670 (channel_sanitize+0xc4965)
+    #3 main /vagrant/test.c:1709 (channel_sanitize+0x955e)
+
+SUMMARY: ThreadSanitizer: data race /vagrant/channel.c:116 in channel_non_blocking_receive
+==================
+ThreadSanitizer: reported 1 warnings
+Running test case: test_non_blocking_receive : Testing non blocking receive ...
+ALL TESTS PASSED
+Tests run: 1

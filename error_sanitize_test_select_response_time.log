@@ -1,0 +1,14 @@
+==================
+WARNING: ThreadSanitizer: thread leak (pid=281051)
+  Thread T1 (tid=281053, finished) created by main thread at:
+    #0 pthread_create <null> (channel_sanitize+0x422a8)
+    #1 test_select_response_time /vagrant/test.c:877 (channel_sanitize+0xc31f4)
+    #2 single_test /vagrant/test.c:1670 (channel_sanitize+0xc48e5)
+    #3 main /vagrant/test.c:1709 (channel_sanitize+0x955e)
+
+SUMMARY: ThreadSanitizer: thread leak (/vagrant/channel_sanitize+0x422a8) in pthread_create
+==================
+ThreadSanitizer: reported 1 warnings
+Running test case: test_select_response_time : Testing select response time (takes around 2-3 minutes) ...
+FAILURE: See test.c Line 886: test_select_response_time: Incorrect selected index
+Tests run: 1

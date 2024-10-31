@@ -1,0 +1,46 @@
+==================
+WARNING: ThreadSanitizer: data race (pid=280982)
+  Read of size 4 at 0x7ffeead86068 by main thread:
+    #0 test_select_with_select /vagrant/test.c:1405 (channel_sanitize+0xc3a1e)
+    #1 test_select_with_select_size1 /vagrant/test.c:1431 (channel_sanitize+0xc3bac)
+    #2 single_test /vagrant/test.c:1670 (channel_sanitize+0xc48e5)
+    #3 main /vagrant/test.c:1709 (channel_sanitize+0x955e)
+
+  Previous write of size 4 at 0x7ffeead86068 by thread T1:
+    #0 helper_select /vagrant/test.c:103 (channel_sanitize+0xbf635)
+
+  As if synchronized via sleep:
+    #0 usleep <null> (channel_sanitize+0x48237)
+    #1 test_select_with_select /vagrant/test.c:1404 (channel_sanitize+0xc3a16)
+    #2 test_select_with_select_size1 /vagrant/test.c:1431 (channel_sanitize+0xc3bac)
+    #3 single_test /vagrant/test.c:1670 (channel_sanitize+0xc48e5)
+    #4 main /vagrant/test.c:1709 (channel_sanitize+0x955e)
+
+  Location is stack of main thread.
+
+  Location is global '<null>' at 0x000000000000 ([stack]+0x00000001f068)
+
+  Thread T1 (tid=280984, finished) created by main thread at:
+    #0 pthread_create <null> (channel_sanitize+0x422a8)
+    #1 test_select_with_select /vagrant/test.c:1401 (channel_sanitize+0xc3a0c)
+    #2 test_select_with_select_size1 /vagrant/test.c:1431 (channel_sanitize+0xc3bac)
+    #3 single_test /vagrant/test.c:1670 (channel_sanitize+0xc48e5)
+    #4 main /vagrant/test.c:1709 (channel_sanitize+0x955e)
+
+SUMMARY: ThreadSanitizer: data race /vagrant/test.c:1405 in test_select_with_select
+==================
+==================
+WARNING: ThreadSanitizer: thread leak (pid=280982)
+  Thread T1 (tid=280984, finished) created by main thread at:
+    #0 pthread_create <null> (channel_sanitize+0x422a8)
+    #1 test_select_with_select /vagrant/test.c:1401 (channel_sanitize+0xc3a0c)
+    #2 test_select_with_select_size1 /vagrant/test.c:1431 (channel_sanitize+0xc3bac)
+    #3 single_test /vagrant/test.c:1670 (channel_sanitize+0xc48e5)
+    #4 main /vagrant/test.c:1709 (channel_sanitize+0x955e)
+
+SUMMARY: ThreadSanitizer: thread leak (/vagrant/channel_sanitize+0x422a8) in pthread_create
+==================
+ThreadSanitizer: reported 2 warnings
+Running test case: test_select_with_select_size1 : Testing select with select ...
+FAILURE: See test.c Line 1405: test_select_with_select: It isn't blocked as expected
+Tests run: 1

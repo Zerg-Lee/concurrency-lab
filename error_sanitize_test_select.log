@@ -1,0 +1,42 @@
+==================
+WARNING: ThreadSanitizer: data race (pid=280954)
+  Read of size 4 at 0x7ffd9e006388 by main thread:
+    #0 test_select /vagrant/test.c:810 (channel_sanitize+0xc1450)
+    #1 single_test /vagrant/test.c:1670 (channel_sanitize+0xc48e5)
+    #2 main /vagrant/test.c:1709 (channel_sanitize+0x955e)
+
+  Previous write of size 4 at 0x7ffd9e006388 by thread T1:
+    #0 helper_select /vagrant/test.c:103 (channel_sanitize+0xbf635)
+
+  As if synchronized via sleep:
+    #0 usleep <null> (channel_sanitize+0x48237)
+    #1 test_select /vagrant/test.c:809 (channel_sanitize+0xc1446)
+    #2 single_test /vagrant/test.c:1670 (channel_sanitize+0xc48e5)
+    #3 main /vagrant/test.c:1709 (channel_sanitize+0x955e)
+
+  Location is stack of main thread.
+
+  Location is global '<null>' at 0x000000000000 ([stack]+0x00000001f388)
+
+  Thread T1 (tid=280956, finished) created by main thread at:
+    #0 pthread_create <null> (channel_sanitize+0x422a8)
+    #1 test_select /vagrant/test.c:806 (channel_sanitize+0xc143c)
+    #2 single_test /vagrant/test.c:1670 (channel_sanitize+0xc48e5)
+    #3 main /vagrant/test.c:1709 (channel_sanitize+0x955e)
+
+SUMMARY: ThreadSanitizer: data race /vagrant/test.c:810 in test_select
+==================
+==================
+WARNING: ThreadSanitizer: thread leak (pid=280954)
+  Thread T1 (tid=280956, finished) created by main thread at:
+    #0 pthread_create <null> (channel_sanitize+0x422a8)
+    #1 test_select /vagrant/test.c:806 (channel_sanitize+0xc143c)
+    #2 single_test /vagrant/test.c:1670 (channel_sanitize+0xc48e5)
+    #3 main /vagrant/test.c:1709 (channel_sanitize+0x955e)
+
+SUMMARY: ThreadSanitizer: thread leak (/vagrant/channel_sanitize+0x422a8) in pthread_create
+==================
+ThreadSanitizer: reported 2 warnings
+Running test case: test_select : Testing select API ...
+FAILURE: See test.c Line 810: test_select: It isn't blocked as expected
+Tests run: 1

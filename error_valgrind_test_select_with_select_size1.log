@@ -1,0 +1,144 @@
+==280985== Memcheck, a memory error detector
+==280985== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==280985== Using Valgrind-3.18.1-42b08ed5bd-20211015 and LibVEX; rerun with -h for copyright info
+==280985== Command: ./channel test_select_with_select_size1 30
+==280985== 
+--280985-- Valgrind options:
+--280985--    -v
+--280985--    --leak-check=full
+--280985--    --errors-for-leak-kinds=all
+--280985--    --error-exitcode=2
+--280985-- Contents of /proc/version:
+--280985--   Linux version 5.15.0-105-generic (buildd@lcy02-amd64-007) (gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0, GNU ld (GNU Binutils for Ubuntu) 2.38) #115-Ubuntu SMP Mon Apr 15 09:52:04 UTC 2024
+--280985-- 
+--280985-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-ssse3
+--280985-- Page sizes: currently 4096, max supported 4096
+--280985-- Valgrind library directory: /usr/libexec/valgrind
+--280985-- Reading syms from /vagrant/channel
+--280985-- Reading syms from /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+--280985--   Considering /usr/lib/debug/.build-id/41/86944c50f8a32b47d74931e3f512b811813b64.debug ..
+--280985--   .. build-id is valid
+--280985-- Reading syms from /usr/libexec/valgrind/memcheck-amd64-linux
+--280985--    object doesn't have a symbol table
+--280985--    object doesn't have a dynamic symbol table
+--280985-- Scheduler: using generic scheduler lock implementation.
+--280985-- Reading suppressions file: /usr/libexec/valgrind/default.supp
+==280985== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-280985-by-vagrant-on-???
+==280985== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-280985-by-vagrant-on-???
+==280985== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-280985-by-vagrant-on-???
+==280985== 
+==280985== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==280985== don't want to do, unless you know exactly what you're doing,
+==280985== or are doing some strange experiment):
+==280985==   /usr/bin/vgdb --pid=280985 ...command...
+==280985== 
+==280985== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==280985==   /path/to/gdb ./channel
+==280985== and then give GDB the following command
+==280985==   target remote | /usr/bin/vgdb --pid=280985
+==280985== --pid is optional if only one valgrind process is running
+==280985== 
+--280985-- REDIR: 0x402aa40 (ld-linux-x86-64.so.2:strlen) redirected to 0x580bcec2 (???)
+--280985-- REDIR: 0x402a810 (ld-linux-x86-64.so.2:index) redirected to 0x580bcedc (???)
+--280985-- Reading syms from /usr/libexec/valgrind/vgpreload_core-amd64-linux.so
+--280985--    object doesn't have a symbol table
+--280985-- Reading syms from /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so
+--280985--    object doesn't have a symbol table
+==280985== WARNING: new redirection conflicts with existing -- ignoring it
+--280985--     old: 0x0402aa40 (strlen              ) R-> (0000.0) 0x580bcec2 ???
+--280985--     new: 0x0402aa40 (strlen              ) R-> (2007.0) 0x0484ee30 strlen
+--280985-- REDIR: 0x4027220 (ld-linux-x86-64.so.2:strcmp) redirected to 0x484fcd0 (strcmp)
+--280985-- REDIR: 0x402afa0 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4853840 (mempcpy)
+--280985-- Reading syms from /usr/lib/x86_64-linux-gnu/libc.so.6
+--280985--   Considering /usr/lib/debug/.build-id/49/0fef8403240c91833978d494d39e537409b92e.debug ..
+--280985--   .. build-id is valid
+==280985== WARNING: new redirection conflicts with existing -- ignoring it
+--280985--     old: 0x04908c60 (memalign            ) R-> (1011.0) 0x0484e080 memalign
+--280985--     new: 0x04908c60 (memalign            ) R-> (1017.0) 0x0484e050 aligned_alloc
+==280985== WARNING: new redirection conflicts with existing -- ignoring it
+--280985--     old: 0x04908c60 (memalign            ) R-> (1011.0) 0x0484e080 memalign
+--280985--     new: 0x04908c60 (memalign            ) R-> (1017.0) 0x0484e020 aligned_alloc
+==280985== WARNING: new redirection conflicts with existing -- ignoring it
+--280985--     old: 0x04908c60 (memalign            ) R-> (1011.0) 0x0484e080 memalign
+--280985--     new: 0x04908c60 (memalign            ) R-> (1017.0) 0x0484e050 aligned_alloc
+==280985== WARNING: new redirection conflicts with existing -- ignoring it
+--280985--     old: 0x04908c60 (memalign            ) R-> (1011.0) 0x0484e080 memalign
+--280985--     new: 0x04908c60 (memalign            ) R-> (1017.0) 0x0484e020 aligned_alloc
+--280985-- REDIR: 0x490b720 (libc.so.6:strnlen) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--280985-- REDIR: 0x490b9e0 (libc.so.6:strpbrk) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--280985-- REDIR: 0x490b2e0 (libc.so.6:strcmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--280985-- REDIR: 0x4929cd0 (libc.so.6:wcsnlen) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--280985-- REDIR: 0x490c6d0 (libc.so.6:memset) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--280985-- REDIR: 0x4928540 (libc.so.6:wcslen) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--280985-- REDIR: 0x490cc10 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--280985-- REDIR: 0x4928370 (libc.so.6:wcschr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--280985-- REDIR: 0x490b260 (libc.so.6:index) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--280985-- REDIR: 0x490b960 (libc.so.6:rindex) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--280985-- REDIR: 0x490c5a0 (libc.so.6:memmove) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--280985-- REDIR: 0x49283f0 (libc.so.6:wcscmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--280985-- REDIR: 0x490c9e0 (libc.so.6:stpncpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--280985-- REDIR: 0x49289b0 (libc.so.6:wmemchr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--280985-- REDIR: 0x490b830 (libc.so.6:strncmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--280985-- REDIR: 0x490ca70 (libc.so.6:strcasecmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--280985-- REDIR: 0x490b420 (libc.so.6:strcspn) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--280985-- REDIR: 0x4928470 (libc.so.6:wcscpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--280985-- REDIR: 0x490b1d0 (libc.so.6:strcat) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--280985-- REDIR: 0x490cb60 (libc.so.6:strncasecmp_l) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--280985-- REDIR: 0x490c480 (libc.so.6:bcmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--280985-- REDIR: 0x4914570 (libc.so.6:memrchr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--280985-- REDIR: 0x490e010 (libc.so.6:strchrnul) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--280985-- REDIR: 0x490b390 (libc.so.6:strcpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--280985-- REDIR: 0x490cb10 (libc.so.6:strcasecmp_l) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--280985-- REDIR: 0x490b6a0 (libc.so.6:strlen) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--280985-- REDIR: 0x490b8d0 (libc.so.6:strncpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--280985-- REDIR: 0x490c950 (libc.so.6:stpcpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--280985-- REDIR: 0x490c3f0 (libc.so.6:memchr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--280985-- REDIR: 0x490bb00 (libc.so.6:strspn) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--280985-- REDIR: 0x490c7d0 (libc.so.6:mempcpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--280985-- REDIR: 0x490cac0 (libc.so.6:strncasecmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--280985-- REDIR: 0x490df80 (libc.so.6:rawmemchr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--280985-- REDIR: 0x491d650 (libc.so.6:__strrchr_sse2) redirected to 0x484e870 (__strrchr_sse2)
+--280985-- REDIR: 0x4915d70 (libc.so.6:__strcmp_sse2_unaligned) redirected to 0x484fbd0 (strcmp)
+--280985-- REDIR: 0x491d440 (libc.so.6:__strchrnul_sse2) redirected to 0x4853330 (strchrnul)
+--280985-- REDIR: 0x49080a0 (libc.so.6:malloc) redirected to 0x4848820 (malloc)
+--280985-- REDIR: 0x491d950 (libc.so.6:__strlen_sse2) redirected to 0x484ed70 (__strlen_sse2)
+--280985-- REDIR: 0x4927850 (libc.so.6:__mempcpy_sse2_unaligned) redirected to 0x4853440 (mempcpy)
+--280985-- REDIR: 0x4909520 (libc.so.6:calloc) redirected to 0x484d9d0 (calloc)
+--280985-- REDIR: 0x49083e0 (libc.so.6:free) redirected to 0x484b210 (free)
+Running test case: test_select_with_select_size1 : Testing select with select ...
+FAILURE: See test.c Line 1405: test_select_with_select: It isn't blocked as expected
+Tests run: 1
+==280985== 
+==280985== HEAP SUMMARY:
+==280985==     in use at exit: 464 bytes in 4 blocks
+==280985==   total heap usage: 5 allocs, 1 frees, 4,560 bytes allocated
+==280985== 
+==280985== Searching for pointers to 4 not-freed blocks
+==280985== Checked 8,494,424 bytes
+==280985== 
+==280985== 192 (152 direct, 40 indirect) bytes in 1 blocks are definitely lost in loss record 3 of 4
+==280985==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==280985==    by 0x10A6B7: channel_create (channel.c:7)
+==280985==    by 0x11011F: test_select_with_select (test.c:1390)
+==280985==    by 0x110CFD: single_test (test.c:1670)
+==280985==    by 0x10A506: main (test.c:1709)
+==280985== 
+==280985== 272 bytes in 1 blocks are possibly lost in loss record 4 of 4
+==280985==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==280985==    by 0x40147D9: calloc (rtld-malloc.h:44)
+==280985==    by 0x40147D9: allocate_dtv (dl-tls.c:375)
+==280985==    by 0x40147D9: _dl_allocate_tls (dl-tls.c:634)
+==280985==    by 0x48F87B4: allocate_stack (allocatestack.c:430)
+==280985==    by 0x48F87B4: pthread_create@@GLIBC_2.34 (pthread_create.c:647)
+==280985==    by 0x11018C: test_select_with_select (test.c:1401)
+==280985==    by 0x110CFD: single_test (test.c:1670)
+==280985==    by 0x10A506: main (test.c:1709)
+==280985== 
+==280985== LEAK SUMMARY:
+==280985==    definitely lost: 152 bytes in 1 blocks
+==280985==    indirectly lost: 40 bytes in 2 blocks
+==280985==      possibly lost: 272 bytes in 1 blocks
+==280985==    still reachable: 0 bytes in 0 blocks
+==280985==         suppressed: 0 bytes in 0 blocks
+==280985== 
+==280985== ERROR SUMMARY: 4 errors from 4 contexts (suppressed: 0 from 0)

@@ -1,0 +1,54 @@
+==================
+WARNING: ThreadSanitizer: data race (pid=281365)
+  Read of size 4 at 0x7ffca9adc2f8 by main thread:
+    #0 test_cpu_utilization_overall /vagrant/test.c:1194 (channel_sanitize+0xc24d0)
+    #1 single_test /vagrant/test.c:1670 (channel_sanitize+0xc48e5)
+    #2 main /vagrant/test.c:1709 (channel_sanitize+0x955e)
+
+  Previous write of size 4 at 0x7ffca9adc2f8 by thread T101:
+    #0 helper_select /vagrant/test.c:103 (channel_sanitize+0xbf635)
+
+  As if synchronized via sleep:
+    #0 usleep <null> (channel_sanitize+0x48237)
+    #1 test_cpu_utilization_overall /vagrant/test.c:1193 (channel_sanitize+0xc24c4)
+    #2 single_test /vagrant/test.c:1670 (channel_sanitize+0xc48e5)
+    #3 main /vagrant/test.c:1709 (channel_sanitize+0x955e)
+
+  Location is stack of main thread.
+
+  Location is global '<null>' at 0x000000000000 ([stack]+0x00000001f2f8)
+
+  Thread T101 (tid=281467, finished) created by main thread at:
+    #0 pthread_create <null> (channel_sanitize+0x422a8)
+    #1 test_cpu_utilization_overall /vagrant/test.c:1191 (channel_sanitize+0xc24ba)
+    #2 single_test /vagrant/test.c:1670 (channel_sanitize+0xc48e5)
+    #3 main /vagrant/test.c:1709 (channel_sanitize+0x955e)
+
+SUMMARY: ThreadSanitizer: data race /vagrant/test.c:1194 in test_cpu_utilization_overall
+==================
+==================
+WARNING: ThreadSanitizer: thread leak (pid=281365)
+  Thread T1 (tid=281367, finished) created by main thread at:
+    #0 pthread_create <null> (channel_sanitize+0x422a8)
+    #1 test_cpu_utilization_overall /vagrant/test.c:1185 (channel_sanitize+0xc247d)
+    #2 single_test /vagrant/test.c:1670 (channel_sanitize+0xc48e5)
+    #3 main /vagrant/test.c:1709 (channel_sanitize+0x955e)
+
+  And 99 more similar thread leaks.
+
+SUMMARY: ThreadSanitizer: thread leak (/vagrant/channel_sanitize+0x422a8) in pthread_create
+==================
+==================
+WARNING: ThreadSanitizer: thread leak (pid=281365)
+  Thread T101 (tid=281467, finished) created by main thread at:
+    #0 pthread_create <null> (channel_sanitize+0x422a8)
+    #1 test_cpu_utilization_overall /vagrant/test.c:1191 (channel_sanitize+0xc24ba)
+    #2 single_test /vagrant/test.c:1670 (channel_sanitize+0xc48e5)
+    #3 main /vagrant/test.c:1709 (channel_sanitize+0x955e)
+
+SUMMARY: ThreadSanitizer: thread leak (/vagrant/channel_sanitize+0x422a8) in pthread_create
+==================
+ThreadSanitizer: reported 3 warnings
+Running test case: test_cpu_utilization_overall : Testing overall CPU utilization (takes around 2 minutes) ...
+FAILURE: See test.c Line 1194: test_cpu_utilization_overall: It isn't blocked as expected
+Tests run: 1

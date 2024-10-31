@@ -1,0 +1,46 @@
+==================
+WARNING: ThreadSanitizer: data race (pid=280975)
+  Read of size 4 at 0x7ffeffd87ed8 by main thread:
+    #0 test_select_and_non_blocking_receive /vagrant/test.c:1353 (channel_sanitize+0xc37ff)
+    #1 test_select_and_non_blocking_receive_size1 /vagrant/test.c:1372 (channel_sanitize+0xc390c)
+    #2 single_test /vagrant/test.c:1670 (channel_sanitize+0xc48e5)
+    #3 main /vagrant/test.c:1709 (channel_sanitize+0x955e)
+
+  Previous write of size 4 at 0x7ffeffd87ed8 by thread T1:
+    #0 helper_select /vagrant/test.c:103 (channel_sanitize+0xbf635)
+
+  As if synchronized via sleep:
+    #0 usleep <null> (channel_sanitize+0x48237)
+    #1 test_select_and_non_blocking_receive /vagrant/test.c:1351 (channel_sanitize+0xc37f7)
+    #2 test_select_and_non_blocking_receive_size1 /vagrant/test.c:1372 (channel_sanitize+0xc390c)
+    #3 single_test /vagrant/test.c:1670 (channel_sanitize+0xc48e5)
+    #4 main /vagrant/test.c:1709 (channel_sanitize+0x955e)
+
+  Location is stack of main thread.
+
+  Location is global '<null>' at 0x000000000000 ([stack]+0x00000001fed8)
+
+  Thread T1 (tid=280977, finished) created by main thread at:
+    #0 pthread_create <null> (channel_sanitize+0x422a8)
+    #1 test_select_and_non_blocking_receive /vagrant/test.c:1348 (channel_sanitize+0xc37ed)
+    #2 test_select_and_non_blocking_receive_size1 /vagrant/test.c:1372 (channel_sanitize+0xc390c)
+    #3 single_test /vagrant/test.c:1670 (channel_sanitize+0xc48e5)
+    #4 main /vagrant/test.c:1709 (channel_sanitize+0x955e)
+
+SUMMARY: ThreadSanitizer: data race /vagrant/test.c:1353 in test_select_and_non_blocking_receive
+==================
+==================
+WARNING: ThreadSanitizer: thread leak (pid=280975)
+  Thread T1 (tid=280977, finished) created by main thread at:
+    #0 pthread_create <null> (channel_sanitize+0x422a8)
+    #1 test_select_and_non_blocking_receive /vagrant/test.c:1348 (channel_sanitize+0xc37ed)
+    #2 test_select_and_non_blocking_receive_size1 /vagrant/test.c:1372 (channel_sanitize+0xc390c)
+    #3 single_test /vagrant/test.c:1670 (channel_sanitize+0xc48e5)
+    #4 main /vagrant/test.c:1709 (channel_sanitize+0x955e)
+
+SUMMARY: ThreadSanitizer: thread leak (/vagrant/channel_sanitize+0x422a8) in pthread_create
+==================
+ThreadSanitizer: reported 2 warnings
+Running test case: test_select_and_non_blocking_receive_size1 : Testing select and non-blocking receive ...
+FAILURE: See test.c Line 1353: test_select_and_non_blocking_receive: It isn't blocked as expected
+Tests run: 1

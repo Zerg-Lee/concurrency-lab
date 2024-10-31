@@ -1,0 +1,3 @@
+Running test case: test_select_and_non_blocking_receive_size1 : Testing select and non-blocking receive ...
+FAILURE: See test.c Line 1353: test_select_and_non_blocking_receive: It isn't blocked as expected
+Tests run: 1

@@ -1,0 +1,16 @@
+==================
+WARNING: ThreadSanitizer: thread leak (pid=194652)
+  Thread T1 (tid=194654, finished) created by main thread at:
+    #0 pthread_create <null> (channel_sanitize+0x422a8)
+    #1 test_cpu_utilization_select /vagrant/test.c:1091 (channel_sanitize+0xc1e92)
+    #2 single_test /vagrant/test.c:1670 (channel_sanitize+0xc48e5)
+    #3 main /vagrant/test.c:1709 (channel_sanitize+0x955e)
+
+  And 99 more similar thread leaks.
+
+SUMMARY: ThreadSanitizer: thread leak (/vagrant/channel_sanitize+0x422a8) in pthread_create
+==================
+ThreadSanitizer: reported 1 warnings
+Running test case: test_cpu_utilization_select : Testing CPU utilization for select API (takes around 2 minutes) ...
+FAILURE: See test.c Line 1105: test_cpu_utilization_select: Invalid select index picked
+Tests run: 1

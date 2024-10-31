@@ -1,0 +1,18 @@
+ThreadSanitizer:DEADLYSIGNAL
+==280991==ERROR: ThreadSanitizer: SEGV on unknown address 0x000000008240 (pc 0x5573156d7555 bp 0x0c0000002096 sp 0x7ffe043f08a0 T280991)
+==280991==The signal is caused by a READ memory access.
+    #0 __tsan::MemoryAccessRange(__tsan::ThreadState*, unsigned long, unsigned long, unsigned long, bool) <null> (channel_sanitize+0x88555)
+    #1 __interceptor_strcmp <null> (channel_sanitize+0x490bc)
+    #2 string_equal /vagrant/test.c:57 (channel_sanitize+0xbf8de)
+    #3 string_equal /vagrant/test.c:50 (channel_sanitize+0xbf8de)
+    #4 test_select_with_same_channel /vagrant/test.c:1472 (channel_sanitize+0xc3e6d)
+    #5 test_select_with_same_channel_size1 /vagrant/test.c:1512 (channel_sanitize+0xc403c)
+    #6 single_test /vagrant/test.c:1670 (channel_sanitize+0xc48e5)
+    #7 main /vagrant/test.c:1709 (channel_sanitize+0x955e)
+    #8 __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58 (libc.so.6+0x29d8f)
+    #9 __libc_start_main_impl ../csu/libc-start.c:392 (libc.so.6+0x29e3f)
+    #10 _start <null> (channel_sanitize+0x9654)
+
+ThreadSanitizer can not provide additional info.
+SUMMARY: ThreadSanitizer: SEGV (/vagrant/channel_sanitize+0x88555) in __tsan::MemoryAccessRange(__tsan::ThreadState*, unsigned long, unsigned long, unsigned long, bool)
+==280991==ABORTING
